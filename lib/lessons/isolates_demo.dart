@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../core/lesson_scaffold.dart';
+import 'isolates_image_demo.dart';
 
 class IsolatesLessonPage extends StatelessWidget {
   const IsolatesLessonPage({super.key});
@@ -99,7 +100,201 @@ class IsolatesInteractiveDemo extends StatelessWidget {
             MaterialPageRoute(builder: (_) => const BestPracticesScreen()),
           ),
         ),
+        const SizedBox(height: 12),
+        _TopicCard(
+          title: '5. Native vs Flutter',
+          subtitle: 'Why is Dart "Single Threaded"?',
+          icon: Icons.compare_arrows,
+          color: Colors.purple.shade100,
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const NativeComparisonScreen()),
+          ),
+        ),
+        const SizedBox(height: 12),
+        _TopicCard(
+          title: '6. Real World Example',
+          subtitle: 'Image Processing (Heavy CPU)',
+          icon: Icons.image,
+          color: Colors.pink.shade100,
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const ImageProcessingIsolateDemo(),
+            ),
+          ),
+        ),
       ],
+    );
+  }
+}
+
+// ... existing code ...
+
+// =============================================================================
+// TOPIC 5: NATIVE VS FLUTTER (THEORY)
+// =============================================================================
+
+class NativeComparisonScreen extends StatelessWidget {
+  const NativeComparisonScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Native vs Flutter Concurrency')),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          const _ExplanationBox(
+            title: 'Is Dart really "Single Threaded"?',
+            text:
+                'Think of it as two layers:\\n'
+                '1. **My Code (Dart)**: Runs on a SINGLE thread (The Main UI Thread). If this handles a heavy loop, the app freezes.\\n'
+                '2. **The Engine (C++)**: Runs on MULTIPLE threads managed by Flutter. It handles the heavy lifting (Rasterizing pixels, Network I/O) in the background.\\n\\n'
+                'This is why network calls don\'t block (Engine handles them), but heavy math loops DO block (Dart handles them).',
+          ),
+          const SizedBox(height: 16),
+          const _SectionHeader('1. Android (Java/Kotlin)'),
+          const _ComparisonCard(
+            title: 'Shared Memory Model',
+            description:
+                'In native Android, you can spawn multiple threads that all access the same variables (Shared Memory). '
+                'This is powerful but dangerous. You need "Locks" and "Synchronized" blocks to prevent race conditions.',
+            icon: Icons.android,
+            color: Colors.green,
+            pros: [
+              'True parallel execution on same memory',
+              'Fine-grained control',
+            ],
+            cons: [
+              'Race conditons (bugs)',
+              'Deadlocks',
+              'Complex synchronization',
+            ],
+          ),
+          const SizedBox(height: 16),
+          const _SectionHeader('2. iOS (Swift/Obj-C)'),
+          const _ComparisonCard(
+            title: 'GCD \u0026 Main Queue',
+            description:
+                'iOS uses Grand Central Dispatch (GCD). You dispatch blocks of code to different queues (Main, Background, etc). '
+                'Like Android, memory is shared. You must ensure you only touch UI on the Main Queue, or the app crashes.',
+            icon: Icons.apple,
+            color: Colors.grey,
+            pros: [
+              'Highly optimized OS scheduling',
+              'Grand Central Dispatch is robust',
+            ],
+            cons: [
+              'Memory safety issues',
+              'UI updates from background crash app',
+            ],
+          ),
+          const SizedBox(height: 16),
+          const _SectionHeader('3. Flutter (Isolates)'),
+          const _ComparisonCard(
+            title: 'Message Passing Model',
+            description:
+                'Dart Isolates do NOT share memory. They are like separate "processes" that talk via messages (Ports). '
+                'This means you cannot accidentally crash the UI from a background thread because you literally cannot access the UI memory from there.',
+            icon: Icons.flutter_dash,
+            color: Colors.blue,
+            pros: [
+              'No race conditions on variables',
+              'No explicit locking needed',
+              'Garbage Collection is isolated (smoother)',
+            ],
+            cons: [
+              'Message passing has overhead (copying data)',
+              'Cannot share large objects easily (requires TransferableTypedData)',
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SectionHeader extends StatelessWidget {
+  final String title;
+  const _SectionHeader(this.title);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Text(
+        title,
+        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+}
+
+class _ComparisonCard extends StatelessWidget {
+  final String title;
+  final String description;
+  final IconData icon;
+  final Color color;
+  final List<String> pros;
+  final List<String> cons;
+
+  const _ComparisonCard({
+    required this.title,
+    required this.description,
+    required this.icon,
+    required this.color,
+    required this.pros,
+    required this.cons,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(icon, size: 32, color: color),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Text(description),
+            const Divider(height: 24),
+            const Text(
+              'Pros:',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
+            ),
+            ...pros.map(
+              (p) => Text('• $p', style: const TextStyle(fontSize: 13)),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Cons:',
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+            ),
+            ...cons.map(
+              (c) => Text('• $c', style: const TextStyle(fontSize: 13)),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -408,7 +603,8 @@ class _SpawnDemoScreenState extends State<SpawnDemoScreen> {
               text:
                   'For ongoing tasks (like a chat socket, audio processing, or complex state management), '
                   'you don\'t want to spawn/kill isolates constantly (overhead).\n\n'
-                  'Instead, spawn once, establish a 2-way communication channel (Ports), and keep it alive.',
+                  'Instead, spawn once, establish a 2-way communication channel (Ports), and keep it alive.\n\n'
+                  'Also known as the "Worker Manager" pattern. You treat the isolate as a dedicated service.',
             ),
           ),
           Padding(

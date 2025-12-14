@@ -1,0 +1,1 @@
+[x] 3. Add another section where we can actually have real isloate example like image compression or video compression. (Implemented Image Processing Demo)
