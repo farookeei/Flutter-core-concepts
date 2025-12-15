@@ -14,6 +14,10 @@ import 'lessons/navigation_demo.dart';
 import 'lessons/background_processing_demo.dart';
 import 'lessons/animations_demo.dart';
 import 'lessons/analytics_demo.dart';
+import 'lessons/shader_demo.dart';
+import 'lessons/slivers_advanced_demo.dart';
+import 'lessons/gesture_arena_demo.dart';
+import 'lessons/ffi_demo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -124,6 +128,30 @@ class MenuPage extends StatelessWidget {
       subtitle: 'Abstraction, Events & Visualization',
       icon: Icons.bar_chart,
       page: AnalyticsLessonPage(),
+    ),
+    Lesson(
+      title: '15. Fragment Shaders',
+      subtitle: 'GLSL, Uniforms & High-Performance UI',
+      icon: Icons.gradient,
+      page: ShaderLessonPage(),
+    ),
+    Lesson(
+      title: '16. Advanced Slivers',
+      subtitle: 'SliverGeometry, RenderSliver & Parallax',
+      icon: Icons.view_week,
+      page: SliversAdvancedLessonPage(),
+    ),
+    Lesson(
+      title: '17. Gesture Arena',
+      subtitle: 'RawGestureDetector, Claims & Victories',
+      icon: Icons.sports_mma,
+      page: GestureArenaLessonPage(),
+    ),
+    Lesson(
+      title: '18. FFI & Native Code',
+      subtitle: 'dart:ffi, C Interop & Blocking UI',
+      icon: Icons.electrical_services,
+      page: FfiLessonPage(),
     ),
   ];
 
