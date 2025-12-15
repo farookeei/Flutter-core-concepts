@@ -69,7 +69,7 @@ class FfiLearnTab extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         const Text(
-          'dart:ffi allows Dart code to call C functions synchronously. This is extremely fast because there is no message serialization (unlike MethodChannels).',
+          'dart:ffi allows Dart code to call C functions synchronously. This is extremely fast because there is no message serialization (unlike MethodChannels).\n\nSee lib/lessons/ffi_deep_dive.md for a detailed comparison.',
           style: TextStyle(fontSize: 16),
         ),
         const SizedBox(height: 24),
