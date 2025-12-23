@@ -18,6 +18,7 @@ import 'lessons/shader_demo.dart';
 import 'lessons/slivers_advanced_demo.dart';
 import 'lessons/gesture_arena_demo.dart';
 import 'lessons/ffi_demo.dart';
+import 'lessons/secure_storage_practical.dart';
 
 void main() {
   runApp(const MyApp());
@@ -152,6 +153,12 @@ class MenuPage extends StatelessWidget {
       subtitle: 'dart:ffi, C Interop & Blocking UI',
       icon: Icons.electrical_services,
       page: FfiLessonPage(),
+    ),
+    Lesson(
+      title: '19. Secure Storage In-Depth',
+      subtitle: 'Production Auth Service & Key Management',
+      icon: Icons.vpn_key,
+      page: SecureStorageProductionLesson(),
     ),
   ];
 
