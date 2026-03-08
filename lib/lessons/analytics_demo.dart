@@ -435,7 +435,7 @@ class _FunnelInteractiveDemoState extends State<FunnelInteractiveDemo> {
                 child: Container(
                   height: 30,
                   decoration: BoxDecoration(
-                    color: color.withOpacity(0.8),
+                    color: color.withValues(alpha: 0.8),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   alignment: Alignment.centerRight,

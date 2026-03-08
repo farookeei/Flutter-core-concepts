@@ -721,12 +721,12 @@ class _InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: color.withOpacity(0.1),
+      color: color.withValues(alpha: 0.1),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
-            Icon(icon, size: 32, color: color.withOpacity(0.7)),
+            Icon(icon, size: 32, color: color.withValues(alpha: 0.7)),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
@@ -743,7 +743,7 @@ class _InfoCard extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     content,
-                    style: TextStyle(color: color.withOpacity(0.8)),
+                    style: TextStyle(color: color.withValues(alpha: 0.8)),
                   ),
                 ],
               ),

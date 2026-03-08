@@ -1,0 +1,15 @@
+Analyzing Flutter-core-concepts...                              
+
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/lessons/analytics_demo.dart:438:34 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/lessons/animations_demo.dart:587:22 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/lessons/background_processing_demo.dart:724:20 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/lessons/background_processing_demo.dart:729:47 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/lessons/background_processing_demo.dart:746:51 • deprecated_member_use
+warning • The value of the local variable 'sum' isn't used • lib/lessons/ffi_demo.dart:162:15 • unused_local_variable
+warning • The value of the local variable 'res' isn't used • lib/lessons/ffi_demo.dart:181:15 • unused_local_variable
+   info • Unnecessary braces in a string interpolation • lib/lessons/inheritance_demo.dart:118:20 • unnecessary_brace_in_string_interps
+   info • The import of 'dart:typed_data' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/services.dart' • lib/lessons/isolates_image_demo.dart:1:8 • unnecessary_import
+warning • Unused import: 'dart:ui' • lib/lessons/isolates_image_demo.dart:2:8 • unused_import
+   info • The import of 'package:flutter/gestures.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/lessons/markdown_playground.dart:1:8 • unnecessary_import
+
+11 issues found. (ran in 2.4s)

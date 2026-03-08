@@ -115,7 +115,7 @@ class _InheritanceInteractiveDemoState
 
   void _tryAbility(String abilityName, String Function() action) {
     setState(() {
-      _log += "\n> ${abilityName}: ${action()}";
+      _log += "\n> $abilityName: ${action()}";
     });
   }
 

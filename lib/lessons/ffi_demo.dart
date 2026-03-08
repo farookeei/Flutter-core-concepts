@@ -131,7 +131,7 @@ class _FfiPlayTabState extends State<FfiPlayTab> {
       if (!File(path).existsSync()) {
         // Fallback to absolute path known from user environment
         path =
-            '/Users/farook/Documents/flutter_low/low_level/native/libnative_add.dylib';
+            '/Users/admin/Documents/Flutter-core-concepts/native/libnative_add.dylib';
       }
 
       final library = ffi.DynamicLibrary.open(path);
@@ -162,7 +162,7 @@ class _FfiPlayTabState extends State<FfiPlayTab> {
     final int sum = _nativeAdd!(a, b);
 
     setState(() {
-      _result = 'C returned: \$sum';
+      _result = 'C returned: $sum';
     });
   }
 
@@ -181,7 +181,7 @@ class _FfiPlayTabState extends State<FfiPlayTab> {
     final int res = _heavyComputation!(1000);
 
     setState(() {
-      _result = 'Heavy task done. Result: \$res';
+      _result = 'Heavy task done. Result: $res';
     });
   }
 
